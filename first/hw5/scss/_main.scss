@@ -1,0 +1,300 @@
+@mixin button {
+  padding: 12px 37px 12px 37px;
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+  background-color: $color-bg-btn;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($color-bg-btn, 5%);
+  }
+}
+
+@mixin link($color: #ffffff, $hcolor: #ffffff) {
+  color: $color;
+
+  &:hover {
+    text-decoration: none;
+    color: lighten($hcolor, 5%);
+  }
+}
+
+@mixin sticker(
+  $text,
+  $rect-width,
+  $rect-height,
+  $rect-left,
+  $rect-bottom,
+  $text-left,
+  $text-bottom
+) {
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    width: $rect-width;
+    height: $rect-height;
+    left: $rect-left;
+    bottom: $rect-bottom;
+    background-color: $color-bg-sticker;
+  }
+
+  &:after {
+    content: $text;
+    position: absolute;
+    z-index: 2;
+    left: $text-left;
+    bottom: $text-bottom;
+  }
+}
+
+$content-width: (
+  max: 1600px,
+  min: 650px,
+  fmax: 1280px,
+  fmin: 650px,
+);
+
+$thin-space: (
+  low: 0.03rem,
+  middle: 0.02rem,
+  high: 0.01rem,
+);
+
+html {
+  line-height: 1.15;
+  background-color: $color-bg-footer;
+}
+body {
+  margin: 0;
+  font-family: $font-primary;
+  font-size: 14px;
+  color: black;
+  background-color: $color-bg;
+}
+
+.landing-logo {
+  width: 110px;
+  font-family: $font-secondary;
+  display: flex;
+
+  img {
+    width: 38px;
+    margin-right: 11px;
+  }
+
+  p {
+    margin: 0;
+    padding-top: 0.1rem;
+    font-size: 1.25rem;
+    letter-spacing: map-get($thin-space, high);
+    font-weight: bolder;
+
+    span {
+      display: block;
+      font-size: 0.4em;
+      text-align: center;
+      margin-top: 2px;
+    }
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: map-get($content-width, max);
+  min-width: map-get($content-width, min);
+}
+
+header {
+  @extend .container;
+  height: 584px;
+  padding-top: 17px;
+  margin-bottom: 33px;
+  background: $image-bg-header center;
+  border-bottom-right-radius: 650px 250px;
+
+  .header-wrap {
+    margin-left: 10%;
+    color: $color-header;
+
+    .landing-logo {
+      margin-bottom: 59px;
+    }
+
+    .header_heading {
+      margin: 0 0 31px 0;
+      width: 410px;
+      position: relative;
+      font-weight: bold;
+      font-size: 3.7rem;
+      line-height: 3.8rem;
+      letter-spacing: map-get($thin-space, low);
+
+      @include sticker('awesome', 252px, 41px, 0, 0, 0, 0);
+    }
+
+    .header_text {
+      margin: 0 0 50px 0;
+      max-width: 560px;
+      padding-right: 20px;
+      font-family: $font-secondary;
+      line-height: 1.3rem;
+      color: lighten($color-header, 2%);
+      white-space: pre-line;
+    }
+
+    .header_button {
+      margin-right: 8.7%;
+
+      @include button;
+    }
+
+    .login {
+      font-size: 1rem;
+      letter-spacing: map-get($thin-space, middle);
+      @include link($hcolor: $color-bg-btn);
+    }
+  }
+}
+
+main {
+  @extend .container;
+
+  .section_text {
+    margin: 0 auto 32px auto;
+    width: 351px;
+    font-size: 2.2rem;
+    color: $color-section-text;
+    text-align: center;
+    position: relative;
+    font-weight: 600;
+
+    @include sticker('adventure', 159px, 42px, 181px, 5px, 183px, 0);
+  }
+
+  .section_card_wrap {
+    margin: 0 auto 51px auto;
+    max-width: 930px;
+    color: white;
+
+    .section_card {
+      background-color: $color-bg-card;
+      margin-bottom: 20px;
+      padding: 17px;
+      display: flex;
+      align-items: stretch;
+      border-radius: 5px;
+
+      .section_card_img {
+        width: 95%;
+        border-radius: 5px;
+      }
+
+      .section_card_right_container {
+        text-align: center;
+        color: $color-card-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 5%;
+        padding-bottom: 3%;
+
+        .section_card_heading {
+          margin: 0;
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: white;
+        }
+
+        .section_card_text {
+          margin: 0 auto;
+          width: 74%;
+          padding-top: 3%;
+          text-align: justify;
+          line-height: 1.2rem;
+          font-family: $font-secondary;
+        }
+
+        .section_link {
+          width: 100px;
+          margin: 0 auto;
+          @include link($color-card-content);
+        }
+      }
+    }
+  }
+
+  .section_banner {
+    margin: 0 auto;
+    max-width: 1000px;
+    position: relative;
+    bottom: -61px;
+    height: 120px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $color-bg-gradient-start;
+    background: linear-gradient(
+      to right,
+      $color-bg-gradient-start,
+      $color-bg-gradient-end
+    );
+
+    .section_banner_text_wrap {
+      align-self: flex-start;
+
+      .section_banner_heading {
+        margin: $margin-banner-heading;
+        width: 350px;
+        color: $color-header;
+        font-size: 1.6rem;
+        font-weight: bold;
+        position: relative;
+
+        @include sticker('start', 54px, 41px, 103px, 0, 104px, 0);
+      }
+
+      .section_banner_text {
+        margin: 0;
+        color: lightgrey;
+        font-family: $font-secondary;
+      }
+    }
+
+    .section_banner_button {
+      @include button;
+    }
+  }
+}
+
+footer {
+  background-color: $color-bg-footer;
+  padding: 107px 0 40px 0;
+  color: #b9bbcc;
+  font-family: $font-secondary;
+
+  .footer-wrap {
+    margin: 0 auto;
+    max-width: map-get($content-width, fmax);
+    min-width: map-get($content-width, fmin);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .footer_logo {
+      padding-top: 5px;
+    }
+
+    .footer_text {
+      width: 260px;
+      margin: 0 auto;
+      font-size: 0.7rem;
+      line-height: 1rem;
+      font-weight: bold;
+    }
+  }
+}
